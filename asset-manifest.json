@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fbc00891.css",
+    "main.js": "/static/js/main.74036da8.js",
+    "static/media/print.png": "/static/media/print.b267a83b631f33594b4f.png",
+    "static/media/kasa.png": "/static/media/kasa.dcfd5b8a19788a1bd843.png",
+    "static/media/ohmyfood.png": "/static/media/ohmyfood.cb19339caac71ce582e8.png",
+    "static/media/Nadjime.jpg": "/static/media/Nadjime.706a11fc401f2510a785.jpg",
+    "index.html": "/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.fbc00891.css",
+    "static/js/main.74036da8.js"
+  ]
+}
