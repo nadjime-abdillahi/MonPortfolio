@@ -19,7 +19,7 @@ export const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormdata({ loading: true });
+    setFormdata((prevData) => ({ ...prevData, loading: false }));
 
     const templateParams = {
       from_name: formData.email,
@@ -38,12 +38,13 @@ export const ContactUs = () => {
       .then(
         (result) => {
           console.log(result.text);
-          setFormdata({
+          setFormdata((prevData) => ({
+            ...prevData,
             loading: false,
             alertmessage: "SUCCESS! ,Thankyou for your messege",
             variant: "success",
             show: true,
-          });
+          }));
         },
         (error) => {
           console.log(error.text);
@@ -86,7 +87,7 @@ export const ContactUs = () => {
               className={`rounded-0 co_alert ${
                 formData.show ? "d-block" : "d-none"
               }`}
-              onClose={() => setFormdata({ show: false })}
+              onClose={() => setFormdata((prevData) => ({ ...prevData, show: false }))}
               dismissible
             >
               <p className="my-0">{formData.alertmessage}</p>
@@ -110,6 +111,54 @@ export const ContactUs = () => {
               )}
             </address>
             <p>{contactConfig.description}</p>
+          </Col>
+          <Col lg="7" className="d-flex align-items-center">
+            <form onSubmit={handleSubmit} className="contact__form w-100">
+              <Row>
+                <Col lg="6" className="form-group">
+                  <input
+                    className="form-control"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    value={formData.name || ""}
+                    type="text"
+                    required
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Col lg="6" className="form-group">
+                  <input
+                    className="form-control rounded-0"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    type="email"
+                    value={formData.email || ""}
+                    required
+                    onChange={handleChange}
+                  />
+                </Col>
+              </Row>
+              <textarea
+                className="form-control rounded-0"
+                id="message"
+                name="message"
+                placeholder="Message"
+                rows="5"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              ></textarea>
+              <br />
+              <Row>
+                <Col lg="12" className="form-group">
+                  <button className="btn ac_btn" type="submit">
+                    {formData.loading ? "Sending..." : "Send"}
+                  </button>
+                </Col>
+              </Row>
+            </form>
           </Col>
         </Row>
       </Container>

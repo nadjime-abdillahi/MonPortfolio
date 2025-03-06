@@ -102,9 +102,9 @@ const contactConfig = {
     YOUR_EMAIL: "nadjimeabdillahi@gmail.com",
     YOUR_FONE: "+262639651623",
     description: "Développeur FrontEnd",
-    // YOUR_SERVICE_ID: "service_id",
-    // YOUR_TEMPLATE_ID: "template_id",
-    // YOUR_USER_ID: "user_id",
+    YOUR_SERVICE_ID: "service_o0h8c27",
+    YOUR_TEMPLATE_ID: "template_70jjl3b",
+    YOUR_USER_ID: "U3SesOI1nu-x04Mo3",
 };
 
 const socialprofils = {
