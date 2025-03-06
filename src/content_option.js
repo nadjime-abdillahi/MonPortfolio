@@ -22,7 +22,7 @@ const introdata = {
 
 const dataabout = {
     title: "Un petit bout de mon éxperience",
-    aboutme: "je cherche à participer à un maximum de prjets qui pourrait me permettre de m'améliorer",
+    aboutme: "je cherche à participer à un maximum de projets qui pourrait me permettre de m'améliorer dans la pratique du code",
 };
 const worktimeline = [{
         jobtitle: "Formateur développeur web",
