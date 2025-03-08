@@ -17,49 +17,45 @@ export const ContactUs = () => {
     variant: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormdata((prevData) => ({ ...prevData, loading: true }));
-
+  
     const templateParams = {
-      from_name: formData.email,
-      user_name: formData.name,
+      from_name: formData.name,
+      user_email: formData.email,
       to_name: contactConfig.YOUR_EMAIL,
       message: formData.message,
     };
-
-    emailjs
-      .send(
+  
+    try {
+      const result = await emailjs.send(
         contactConfig.YOUR_SERVICE_ID,
         contactConfig.YOUR_TEMPLATE_ID,
         templateParams,
         contactConfig.YOUR_USER_ID
-      )
-      .then(
-        (result) => {
-          console.log('message envoyé :',result.text);
-          setFormdata({
-            email: "",
-            name: "",
-            message: "",
-            loading: false,
-            alertmessage: "SUCCESS! ,Thankyou for your message",
-            variant: "success",
-            show: true,
-          });
-        },
-        (error) => {
-          console.log(error.text);
-          setFormdata((prevData) => ({
-            ...prevData,
-            loading: false,
-            alertmessage: `Faild to send!,${error.text}`,
-            variant: "danger",
-            show: true,
-          }));
-          document.getElementsByClassName("co_alert")[0].scrollIntoView();
-        }
       );
+  
+      console.log("Message envoyé :", result.text);
+      setFormdata({
+        email: "",
+        name: "",
+        message: "",
+        loading: false,
+        show: true,
+        alertmessage: "SUCCESS! Thank you for your message",
+        variant: "success",
+      });
+    } catch (error) {
+      console.log("Erreur:", error.text);
+      setFormdata((prevData) => ({
+        ...prevData,
+        loading: false, // Correction ici
+        alertmessage: `Failed to send! ${error.text}`,
+        variant: "danger",
+        show: true,
+      }));
+    }
   };
 
   const handleChange = (e) => {
