@@ -38,17 +38,21 @@ export const ContactUs = () => {
       .then(
         (result) => {
           console.log('message envoyé :',result.text);
-          setFormdata((prevData) => ({
-            ...prevData,
+          setFormdata({
+            email: "",
+            name: "",
+            message: "",
             loading: false,
             alertmessage: "SUCCESS! ,Thankyou for your message",
             variant: "success",
             show: true,
-          }));
+          });
         },
         (error) => {
           console.log(error.text);
           setFormdata((prevData) => ({
+            ...prevData,
+            loading: false,
             alertmessage: `Faild to send!,${error.text}`,
             variant: "danger",
             show: true,
@@ -154,7 +158,7 @@ export const ContactUs = () => {
               <br />
               <Row>
                 <Col lg="12" className="form-group">
-                  <button className="btn ac_btn" type="submit">
+                  <button className="btn ac_btn" type="submit" disabled={formData.loading}>
                     {formData.loading ? "Sending..." : "Send"}
                   </button>
                 </Col>
