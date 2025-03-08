@@ -19,6 +19,19 @@ export const ContactUs = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("handleSubmit déclenché !");
+
+    if (!formData.name || !formData.email || !formData.message) {
+      console.log("Erreur : Un champ est vide !");
+      setFormdata((prevData) => ({
+        ...prevData,
+        alertmessage: "Tous les champs sont obligatoires !",
+        variant: "warning",
+        show: true,
+      }));
+      return;
+    }
+    
     setFormdata((prevData) => ({ ...prevData, loading: true }));
 
     const templateParams = {
@@ -28,7 +41,10 @@ export const ContactUs = () => {
       message: formData.message,
     };
 
+    console.log("templateParams:", templateParams);
+
     try{
+      console.log("Tentative d'envoi du message...");
       const result = await emailjs.send(
         contactConfig.YOUR_SERVICE_ID,
         contactConfig.YOUR_TEMPLATE_ID,
@@ -42,21 +58,23 @@ export const ContactUs = () => {
             name: "",
             message: "",
             loading: false,
+            show: true,
             alertmessage: "SUCCESS! ,Thankyou for your message",
             variant: "success",
           });
         } catch (error) {
-          console.log(error.text);
+          console.log("Erreur gros", error);
           setFormdata((prevData) => ({
             ...prevData,
             loading: false,
-            alertmessage: `Faild to send! ${error.text}`,
+            alertmessage: `Faild to send! ${error.message}`,
             variant: "danger",
             show: true,
           }));
-          document.getElementsByClassName("co_alert")[0].scrollIntoView();
         }
   };
+
+  
 
   const handleChange = (e) => {
     setFormdata({
