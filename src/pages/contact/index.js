@@ -19,7 +19,7 @@ export const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormdata((prevData) => ({ ...prevData, loading: false }));
+    setFormdata((prevData) => ({ ...prevData, loading: true }));
 
     const templateParams = {
       from_name: formData.email,
@@ -37,22 +37,22 @@ export const ContactUs = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          console.log('message envoyé :',result.text);
           setFormdata((prevData) => ({
             ...prevData,
             loading: false,
-            alertmessage: "SUCCESS! ,Thankyou for your messege",
+            alertmessage: "SUCCESS! ,Thankyou for your message",
             variant: "success",
             show: true,
           }));
         },
         (error) => {
           console.log(error.text);
-          setFormdata({
+          setFormdata((prevData) => ({
             alertmessage: `Faild to send!,${error.text}`,
             variant: "danger",
             show: true,
-          });
+          }));
           document.getElementsByClassName("co_alert")[0].scrollIntoView();
         }
       );
@@ -121,6 +121,7 @@ export const ContactUs = () => {
                     id="name"
                     name="name"
                     placeholder="Name"
+                    aria-label="Name"
                     value={formData.name || ""}
                     type="text"
                     required
